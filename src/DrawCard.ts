@@ -12,7 +12,7 @@ const footer = [
 ]
 export default function DrawCard (profile) {
     const fName = profile.personal.displayName.split(' ')[0]
-    const website = profile.personal.displayEmail.replace(/.*@/, "")
+    const website = `https://${profile.personal.displayEmail.replace(/.*@/, "")}`
     const CardData = [
         null,
         chalk.bold.green(padCenter(profile.personal.displayName)),
