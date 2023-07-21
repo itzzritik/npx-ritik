@@ -1,65 +1,42 @@
 import chalk from 'chalk';
 import boxen from 'boxen';
+import { getBanner, padCenter, startCase } from './utils.js';
 
-const data = {
-    name: chalk.bold.green("             Anmol Pratap Singh"),
-    handle: chalk.white("@anmol098"),
-    work: `${chalk.white("Lead Software Engineer at")} ${chalk
-        .hex("#2b82b2")
-        .bold("FootLoose Labs")}`,
-    twitter: chalk.gray("https://twitter.com/") + chalk.cyan("misteranmol"),
-    github: chalk.gray("https://github.com/") + chalk.green("anmol098"),
-    linkedin: chalk.gray("https://linkedin.com/in/") + chalk.blue("anmol098"),
-    web: chalk.cyan("https://anmolsingh.me"),
-    npx: chalk.red("npx") + " " + chalk.white("anmol"),
+const tip = [`Tip: Try ${chalk.cyanBright.bold("cmd/ctrl + click")} on the links above`, null].join("\n");
 
-    labelWork: chalk.white.bold("       Work:"),
-    labelTwitter: chalk.white.bold("    Twitter:"),
-    labelGitHub: chalk.white.bold("     GitHub:"),
-    labelLinkedIn: chalk.white.bold("   LinkedIn:"),
-    labelWeb: chalk.white.bold("        Web:"),
-    labelCard: chalk.white.bold("       Card:")
-};
-const Card = boxen(
-    [
-        `${data.name}`,
-        ``,
-        `${data.labelWork}  ${data.work}`,
-        ``,
-        `${data.labelTwitter}  ${data.twitter}`,
-        `${data.labelGitHub}  ${data.github}`,
-        `${data.labelLinkedIn}  ${data.linkedin}`,
-        `${data.labelWeb}  ${data.web}`,
-        ``,
-        `${data.labelCard}  ${data.npx}`,
-        ``,
-        `${chalk.italic(
-            "I am currently looking for new opportunities,"
-        )}`,
-        `${chalk.italic("my inbox is always open. Whether you have a")}`,
-        `${chalk.italic(
-            "question or just want to say hi, I will try "
-        )}`,
-        `${chalk.italic(
-            "my best to get back to you!"
-        )}`
-    ].join("\n"),
-    {
+const footer = [
+    "I am actively seeking new opportunities and welcome any inquiries",
+    "Please feel free to contact me for questions or casual greetings",
+    "I will make every effort to respond promptly",
+    "My inbox remains open for your correspondence.",
+]
+export default function DrawCard (profile) {
+    const fName = profile.personal.displayName.split(' ')[0]
+    const website = profile.personal.displayEmail.replace(/.*@/, "")
+    const CardData = [
+        null,
+        chalk.bold.green(padCenter(profile.personal.displayName)),
+        chalk.blackBright(padCenter(profile.personal.currentRole)),
+        null,
+    ]
+    profile.socialHandles.forEach((social) => {
+        CardData.push(getBanner(social.platform, startCase(social.platform), `${social.url}/${social.handle}`))
+    })
+    CardData.push(getBanner('website', 'Portfolio', website))
+    CardData.push(getBanner('npx', 'Npx', `npx ${fName.toLowerCase()}`))
+    CardData.push(null)
+    footer.forEach((line) => {
+        CardData.push(chalk.italic.whiteBright(padCenter(line)))
+    })
+    CardData.push(null)
+
+    const Card = boxen(CardData.join("\n"), {
         margin: 1,
         float: 'center',
-        padding: 1,
         borderStyle: "single",
         borderColor: "green"
-    }
-);
-const tip = [
-    `Tip: Try ${chalk.cyanBright.bold(
-        "cmd/ctrl + click"
-    )} on the links above`,
-    '',
-].join("\n");
+    });
 
-export default function DrawCard () {
     console.log(Card);
     console.log(tip);
 }

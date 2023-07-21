@@ -23,15 +23,15 @@ const choices = [
         value: PromptAction.MEETING,
     },
     {
-        name: "Just quit.",
+        name: "Exit.",
         value: PromptAction.QUIT,
     }
 ];
 
-export default function Prompt () {
+export default function Prompt (profile) {
     const actions = {
         [PromptAction.EMAIL]: () => {
-            open(`mailto:hi@ritik.me?subject=Hi%20Ritik!`);
+            open(`mailto:${profile?.personal?.displayEmail}?subject=Hi%20${profile?.personal?.displayName.split(' ')[0]}!`);
             console.log("\nDone, Catch you in your inbox soon!\n");
         },
         [PromptAction.RESUME]: () => {
@@ -48,7 +48,7 @@ export default function Prompt () {
     };
 
     select({
-        message: "Let's connect?",
+        message: "Choose an Action",
         choices,
-    }).then(answer => console.log(answer));
+    }).then(answer => actions[answer]());
 }
