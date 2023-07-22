@@ -11,7 +11,7 @@ export default {
 		{
 			name: "ritik",
 			file: "dist/index.js",
-			format: "cjs",
+			format: "umd",
 		},
 	],
 	external: [...Object.keys(pkg.dependencies)],
