@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import axios from "axios";
 import DrawCard from "./DrawCard.js";
 import Prompt from "./Prompt.js";

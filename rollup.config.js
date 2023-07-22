@@ -12,6 +12,7 @@ export default {
 			name: "ritik",
 			file: "dist/index.js",
 			format: "es",
+			banner: "#!/usr/bin/env node",
 		},
 	],
 	external: [...Object.keys(pkg.dependencies)],
