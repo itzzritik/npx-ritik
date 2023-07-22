@@ -10,8 +10,8 @@ export default {
 	output: [
 		{
 			name: "ritik",
-			file: "dist/index.cjs",
-			format: "cjs",
+			file: "dist/index.js",
+			format: "es",
 		},
 	],
 	external: [...Object.keys(pkg.dependencies)],

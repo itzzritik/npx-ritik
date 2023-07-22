@@ -1,6 +1,6 @@
 {
 	"name": "ritik",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"type": "module",
 	"description": "CLI Portfolio",
 	"main": "dist/index.cjs",
@@ -8,7 +8,7 @@
 		"ritik": "dist/index.cjs"
 	},
 	"engines": {
-		"node": ">=12"
+		"node": ">=14"
 	},
 	"scripts": {
 		"build": "rollup -c",
