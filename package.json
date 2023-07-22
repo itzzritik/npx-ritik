@@ -1,10 +1,11 @@
 {
 	"name": "ritik",
 	"version": "0.0.6",
+	"type": "module",
 	"description": "CLI Portfolio",
-	"main": "dist/index.js",
+	"main": "dist/index.cjs",
 	"bin": {
-		"ritik": "dist/index.js"
+		"ritik": "dist/index.cjs"
 	},
 	"engines": {
 		"node": ">=12"

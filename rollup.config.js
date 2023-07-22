@@ -10,7 +10,7 @@ export default {
 	output: [
 		{
 			name: "ritik",
-			file: "dist/index.js",
+			file: "dist/index.cjs",
 			format: "cjs",
 		},
 	],
