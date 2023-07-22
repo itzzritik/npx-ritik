@@ -1,53 +1,58 @@
 {
-  "name": "ritik",
-  "version": "0.0.4",
-  "type": "module",
-  "description": "CLI Portfolio",
-  "main": "dist/index.js",
-  "bin": "dist/index.js",
-  "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -c && node dist/index.js",
-    "dev": "ts-node --esm src/index.ts"
+	"name": "ritik",
+	"version": "0.0.5",
+	"type": "module",
+	"description": "CLI Portfolio",
+	"main": "dist/index.js",
+  "bin": {
+    "ritik": "dist/index.js"
   },
-  "dependencies": {
-    "@inquirer/prompts": "^3.0.0",
-    "axios": "^1.4.0",
-    "boxen": "^7.1.1",
-    "chalk": "^5.3.0",
-    "open": "^9.1.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.4.2",
-    "esbuild": "^0.18.15",
-    "rollup": "^3.26.3",
-    "rollup-plugin-esbuild": "^5.0.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "files": [
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/itzzritik/npx-ritik.git"
-  },
-  "keywords": [
-    "ritik",
-    "portfolio",
-    "npx",
-    "cli"
-  ],
-  "author": {
-    "name": "Ritik Srivastava"
-  },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/itzzritik/npx-ritik/issues"
-  },
-  "homepage": "https://github.com/itzzritik/npx-ritik#readme"
+	"engines": {
+		"node": ">=12"
+	},
+	"scripts": {
+		"build": "rollup -c",
+		"start": "rollup -c && node dist/index.js",
+		"dev": "ts-node --esm src/index.ts"
+	},
+	"dependencies": {
+		"@inquirer/prompts": "^3.0.0",
+		"axios": "^1.4.0",
+		"boxen": "^7.1.1",
+		"chalk": "^5.3.0",
+		"open": "^9.1.0"
+	},
+	"devDependencies": {
+		"@types/node": "^20.4.2",
+		"esbuild": "^0.18.15",
+		"rollup": "^3.26.3",
+		"rollup-plugin-esbuild": "^5.0.0",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.1.6"
+	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
+	"files": [
+		"dist"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/itzzritik/npx-ritik.git"
+	},
+	"keywords": [
+		"ritik",
+		"portfolio",
+		"npx",
+		"cli"
+	],
+	"author": {
+		"name": "Ritik Srivastava"
+	},
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/itzzritik/npx-ritik/issues"
+	},
+	"homepage": "https://github.com/itzzritik/npx-ritik#readme"
 }
