@@ -1,13 +1,12 @@
 {
 	"compilerOptions": {
-		"target": "ES2017",
-		"module": "CommonJS",
-		"moduleResolution": "node",
-		"sourceMap": true,
-		"esModuleInterop": true,
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"sourceMap": false,
 		"outDir": "dist",
 		"baseUrl": "src"
 	},
 	"include": ["**/*.ts"],
-	"exclude": ["node_modules", "dist", ".vscode"],
+	"exclude": ["node_modules", "dist", ".vscode"]
 }

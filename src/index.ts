@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import DrawCard from './DrawCard';
-import Prompt from './Prompt';
+import DrawCard from './DrawCard.js';
+import Prompt from './Prompt.js';
 
 const run = async () => {
 	console.clear();

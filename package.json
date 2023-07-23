@@ -13,7 +13,7 @@
 	"scripts": {
 		"build": "rollup -c",
 		"start": "rollup -c && node dist/index.js",
-		"dev": "ts-node --esm src/index.ts"
+		"dev": "nodemon --exec ts-node-esm src/index.ts"
 	},
 	"dependencies": {
 		"@inquirer/prompts": "^3.0.0",
@@ -28,7 +28,9 @@
 		"@typescript-eslint/parser": "^6.1.0",
 		"esbuild": "^0.18.15",
 		"eslint": "^8.45.0",
+		"eslint-import-resolver-typescript": "^3.5.5",
 		"eslint-plugin-import": "^2.27.5",
+		"nodemon": "^3.0.1",
 		"rollup": "^3.26.3",
 		"rollup-plugin-esbuild": "^5.0.0",
 		"ts-node": "^10.9.1",
