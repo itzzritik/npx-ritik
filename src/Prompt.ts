@@ -6,25 +6,29 @@ enum PromptAction {
     EMAIL = 'email',
     RESUME = 'resume',
     MEETING = 'meeting',
-    QUIT = 'quit'
+    EXIT = 'exit'
 }
 
 const choices = [
 	{
 		name: `Send me an ${chalk.green.bold('email')}?`,
 		value: PromptAction.EMAIL,
+		description: chalk.white.dim.bold('\nI will get back to you as soon as possible.'),
 	},
 	{
 		name: `Checkout my ${chalk.magentaBright.bold('Resume')}?`,
 		value: PromptAction.RESUME,
+		description: chalk.white.dim.bold('\nI am actively seeking new opportunities and welcome any inquiries.'),
 	},
 	{
 		name: `Schedule a ${chalk.redBright.bold('Meeting')}?`,
 		value: PromptAction.MEETING,
+		description: chalk.white.dim.bold('\nI will make every effort to respond promptly.'),
 	},
 	{
 		name: 'Exit.',
-		value: PromptAction.QUIT,
+		value: PromptAction.EXIT,
+		description: chalk.white.dim.bold('\nHasta la vista.'),
 	},
 ];
 
@@ -42,7 +46,7 @@ export default function Prompt (profile) {
 			open('https://calendly.com/itzzritik/hello');
 			console.log('\nLooking forward to our meeting! See you there.\n');
 		},
-		[PromptAction.QUIT]: () => {
+		[PromptAction.EXIT]: () => {
 			console.log('Hasta la vista.\n');
 		},
 	};
