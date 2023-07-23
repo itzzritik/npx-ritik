@@ -24,7 +24,11 @@
 	},
 	"devDependencies": {
 		"@types/node": "^20.4.2",
+		"@typescript-eslint/eslint-plugin": "^6.1.0",
+		"@typescript-eslint/parser": "^6.1.0",
 		"esbuild": "^0.18.15",
+		"eslint": "^8.45.0",
+		"eslint-plugin-import": "^2.27.5",
 		"rollup": "^3.26.3",
 		"rollup-plugin-esbuild": "^5.0.0",
 		"ts-node": "^10.9.1",

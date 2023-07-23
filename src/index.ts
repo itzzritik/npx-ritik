@@ -1,14 +1,15 @@
-import axios from "axios";
-import DrawCard from "./DrawCard.js";
-import Prompt from "./Prompt.js";
+import axios from 'axios';
+
+import DrawCard from './DrawCard';
+import Prompt from './Prompt';
 
 const run = async () => {
-    console.clear();
+	console.clear();
 
-    const profile = await axios.get('https://raw.githubusercontent.com/itzzritik/ItzzRitik/main/profile/profile.json')
+	const profile = await axios.get('https://raw.githubusercontent.com/itzzritik/ItzzRitik/main/profile/profile.json');
 
-    DrawCard(profile.data);
-    Prompt(profile.data);
-}
+	DrawCard(profile.data);
+	Prompt(profile.data);
+};
 
 run();

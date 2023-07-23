@@ -1,0 +1,22 @@
+{
+    "files.eol": "\n",
+	"editor.tabSize": 4,
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true,
+	},
+	
+	"gitmoji.showEmojiCode": true,
+	"gitmoji.addCustomEmoji": [
+		{
+			"emoji": "🛡️",
+			"code": ":shield:",
+			"description": "Typescript (TS) related updates"
+		}
+	],
+    
+    "cSpell.words": [
+		
+	]
+}
