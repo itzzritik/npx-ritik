@@ -12,11 +12,11 @@ const footer = [
 	'My inbox remains open for your correspondence.',
 ];
 export default function DrawCard (profile) {
-	const fName = profile.personal.displayName.split(' ')[0];
+	const fName = profile?.personal?.name?.split?.(' ')?.[0];
 	const website = `https://${profile.personal.displayEmail.replace(/.*@/, '')}`;
 	const CardData = [
 		null,
-		chalk.bold.green(padCenter(profile.personal.displayName)),
+		chalk.bold.green(padCenter(profile.personal.name)),
 		chalk.blackBright(padCenter(profile.personal.currentRole)),
 		null,
 	];

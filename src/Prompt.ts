@@ -35,7 +35,7 @@ const choices = [
 export default function Prompt (profile) {
 	const actions = {
 		[PromptAction.EMAIL]: () => {
-			open(`mailto:${profile?.personal?.displayEmail}?subject=Hi%20${profile?.personal?.displayName.split(' ')[0]}!`);
+			open(`mailto:${profile?.personal?.displayEmail}?subject=Hi%20${profile?.personal?.name?.split?.(' ')?.[0]}!`);
 			console.log('\nDone, Catch you in your inbox soon!\n');
 		},
 		[PromptAction.RESUME]: () => {
