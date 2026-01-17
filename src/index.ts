@@ -1,24 +1,19 @@
-import updateNotifier from 'update-notifier';
-import ora from 'ora';
-import chalk from 'chalk';
-
 import packageJson from '../package.json';
-import { CONFIG, DEFAULT_CLI_CONFIG } from './config.js';
-import DrawCard from './DrawCard.js';
-import Prompt from './Prompt.js';
-import { UserProfile } from './types.js';
+import { DEFAULT_CLI_CONFIG } from './core/config.js';
+import { UserProfile } from './core/types.js';
+import { fetchProfile } from './services/api.js';
+import { checkForUpdate } from './services/system.js';
+import { Spinner } from './ui/components.js';
+import { chalk } from './ui/theme.js';
+import { drawCard, promptAction } from './ui/views.js';
 
 const run = async () => {
 	console.clear();
-	updateNotifier({ pkg: packageJson }).notify();
-	const spinner = ora('Fetching profile data...').start();
+	const updateCheck = checkForUpdate(packageJson);
+	const spinner = new Spinner('Fetching profile data...').start();
 
 	try {
-		const response = await fetch(CONFIG.profileUrl);
-		if (!response.ok) {
-			throw new Error(`Failed to fetch profile: ${response.statusText}`);
-		}
-		const profile: UserProfile = await response.json();
+		const profile: UserProfile = await fetchProfile();
 
 		profile.config = {
 			theme: { ...DEFAULT_CLI_CONFIG.theme, ...profile.config?.theme },
@@ -33,8 +28,14 @@ const run = async () => {
 
 		spinner.succeed(`Profile loaded (${chalk.dim(`v${packageJson.version}`)})`);
 
-		DrawCard(profile);
-		Prompt(profile);
+		const latestVersion = await updateCheck;
+		if (latestVersion) {
+			const msg = `Update available! ${chalk.dim(packageJson.version)} → ${chalk.hex('#00FF00')(latestVersion)}\nRun ${chalk.cyanBright(`npm i -g ${packageJson.name}`)} to update`;
+			console.log('\n' + msg + '\n');
+		}
+
+		drawCard(profile);
+		promptAction(profile);
 	} catch (error) {
 		spinner.fail('Failed to load profile');
 		if (error instanceof Error) {
