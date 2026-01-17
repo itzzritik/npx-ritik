@@ -45,15 +45,7 @@ jobs:
                   version: latest
                   run_install: true
 
-            - name: Set version variable 📝
-              run: |
-                  if [ "${{ github.event_name }}" == "push" ]; then
-                    echo "VERSION=patch" >> $GITHUB_ENV
-                  else
-                    echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
-                  fi
-
-            - name: Generate new version (Local Only) 🏷️
+            - name: Setup Git & GPG 🔐
               run: |
                   git config --global user.email "ritik.jarvis@gmail.com"
                   git config --global user.name "Jarvis"
@@ -68,10 +60,29 @@ jobs:
                   git config --global commit.gpgsign true
                   npm config set sign-git-tag true
 
-                  npm version $VERSION -m "🤖 Jarvis published a $VERSION version"
+            - name: Set version variable 📝
+              run: |
+                  if [ "${{ github.event_name }}" == "push" ]; then
+                    echo "VERSION=patch" >> $GITHUB_ENV
+                  else
+                    echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+                  fi
+
+            - name: Generate new version (Local Only) 🏷️
+              run: npm version $VERSION -m "🤖 Jarvis published a $VERSION version"
 
             - name: Building Package 🏗️
               run: pnpm build
+
+            - name: Generate Demo Screenshot 📸
+              uses: charmbracelet/vhs-action@v1
+              with:
+                  path: 'demo.tape'
+
+            - name: Commit Demo Screenshot 💾
+              run: |
+                  git add demo.png
+                  git commit -m "🤖 Update demo screenshot" || echo "No changes to demo.png"
 
             - name: Publishing Package 🚀
               run: npm publish --access public --provenance

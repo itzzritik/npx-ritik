@@ -41,7 +41,8 @@
 		"registry": "https://registry.npmjs.org/"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"demo.png"
 	],
 	"repository": {
 		"type": "git",
