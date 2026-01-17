@@ -43,7 +43,7 @@ export default function Prompt(profile) {
 			console.log('\n\nThanks for reading — hope my resume speaks your language.\n');
 		},
 		[PromptAction.MEETING]: () => {
-			open('https://huddle.ritik.me');
+			open('https://meet.ritik.me');
 			console.log('\n\nMeeting scheduled — time to build something great together.\n');
 		},
 		[PromptAction.EXIT]: () => {
