@@ -4,9 +4,9 @@
 
 ## Overview
 
-A CLI-first personal portfolio that runs right inside the terminal. Instead of a static website, this is a small utility that prints my profile directly in the shell
+A Node.js based CLI portfolio published as an npm package and executed via npx. Instead of serving static HTML, it runs as a command line utility that renders professional profile information directly in the terminal.
 
-It is designed to live where developers already spend most of their time. The data is fetched dynamically at runtime, so things like my role, socials, and contact info are always up to date. Everything is shown in a clean, box-style layout that feels native to the terminal
+The tool fetches data dynamically at runtime, ensuring roles, social links, and contact details stay in sync with the source of truth. It is built to feel native to the shell, using a structured, box-style TUI layout that fits naturally into a developer’s workflow.
 
 ## Usage
 
