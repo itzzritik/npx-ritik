@@ -1,12 +1,16 @@
-import { createRequire } from 'module';
-
 import json from '@rollup/plugin-json';
+import commonjs from '@rollup/plugin-commonjs';
 import esbuild from 'rollup-plugin-esbuild';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 
-const { dependencies } = createRequire(import.meta.url)('./package.json');
 export default {
 	input: 'src/index.ts',
 	plugins: [
+		nodeResolve({
+			preferBuiltins: true,
+			exportConditions: ['node'],
+		}),
+		commonjs(),
 		json(),
 		esbuild({ minify: true }),
 	],
@@ -18,5 +22,4 @@ export default {
 			banner: '#!/usr/bin/env node',
 		},
 	],
-	external: [...Object.keys(dependencies)],
 };
