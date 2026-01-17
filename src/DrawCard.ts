@@ -21,11 +21,17 @@ export default function DrawCard(profile: UserProfile) {
 		chalk.whiteBright(padCenter(profile.personal.currentRole)),
 		null,
 	];
+	const safeColors: Record<string, string> = {
+		github: '#666666',
+		x: '#1DA1F2',
+	};
+
 	profile.socialHandles.forEach((social) => {
-		CardData.push(getBanner(social.platform, startCase(social.platform), `${social.url}/${social.handle}`));
+		const color = safeColors[social.platform] || social.color;
+		CardData.push(getBanner(startCase(social.platform), `${social.url}/${social.handle}`, color));
 	});
-	CardData.push(getBanner('website', 'Portfolio', website));
-	CardData.push(getBanner('npx', 'Npx', `npx ${fName.toLowerCase()}`));
+	CardData.push(getBanner('Portfolio', website, '#f1c40f'));
+	CardData.push(getBanner('Npx', `npx ${fName.toLowerCase()}`, '#cb3837'));
 	CardData.push(null);
 	footer.forEach((line) => {
 		CardData.push(chalk.italic.whiteBright(padCenter(line)));

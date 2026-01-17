@@ -1,7 +1,8 @@
 export interface SocialHandle {
-	platform: 'facebook' | 'twitter' | 'linkedin' | 'github' | 'instagram' | 'website' | 'email' | 'npx';
+	platform: 'facebook' | 'twitter' | 'linkedin' | 'github' | 'instagram' | 'website' | 'email' | 'npx' | 'x';
 	url: string;
 	handle: string;
+	color: string;
 }
 
 export interface UserProfile {

@@ -53,9 +53,6 @@ jobs:
                     echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_ENV
                   fi
 
-            - name: Building Package 🏗️
-              run: pnpm build
-
             - name: Generate new version (Local Only) 🏷️
               run: |
                   git config --global user.email "ritik.jarvis@gmail.com"
@@ -72,6 +69,9 @@ jobs:
                   npm config set sign-git-tag true
 
                   npm version $VERSION -m "🤖 Jarvis published a $VERSION version"
+
+            - name: Building Package 🏗️
+              run: pnpm build
 
             - name: Publishing Package 🚀
               run: npm publish --access public --provenance

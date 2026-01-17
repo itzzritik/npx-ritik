@@ -1,5 +1,7 @@
 import ora from 'ora';
+import chalk from 'chalk';
 
+import { version } from '../package.json';
 import DrawCard from './DrawCard.js';
 import Prompt from './Prompt.js';
 import { UserProfile } from './types.js';
@@ -14,7 +16,7 @@ const run = async () => {
 			throw new Error(`Failed to fetch profile: ${response.statusText}`);
 		}
 		const profile: UserProfile = await response.json();
-		spinner.succeed('Profile loaded successfully');
+		spinner.succeed(`Profile loaded (${chalk.dim(`v${version}`)})`);
 
 		DrawCard(profile);
 		Prompt(profile);
