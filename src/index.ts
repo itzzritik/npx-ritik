@@ -2,14 +2,14 @@ import packageJson from '../package.json';
 import { DEFAULT_CLI_CONFIG } from './core/config.js';
 import { UserProfile } from './core/types.js';
 import { fetchProfile } from './services/api.js';
-import { checkForUpdate } from './services/system.js';
+import { ensureLatest } from './services/updater.js';
 import { Spinner } from './ui/components.js';
 import { chalk } from './ui/theme.js';
 import { drawCard, promptAction } from './ui/views.js';
 
 const run = async () => {
 	console.clear();
-	const updateCheck = checkForUpdate(packageJson);
+	if (ensureLatest(packageJson.name)) return;
 	const spinner = new Spinner('Fetching profile data...').start();
 
 	try {
@@ -27,22 +27,12 @@ const run = async () => {
 		};
 
 		spinner.succeed(`Profile loaded (${chalk.dim(`v${packageJson.version}`)})`);
-
-		const latestVersion = await updateCheck;
-		if (latestVersion) {
-			const msg = `Update available! ${chalk.dim(packageJson.version)} → ${chalk.hex('#00FF00')(latestVersion)}\nRun ${chalk.cyanBright(`npm i -g ${packageJson.name}`)} to update`;
-			console.log('\n' + msg + '\n');
-		}
-
 		drawCard(profile);
 		promptAction(profile);
 	} catch (error) {
 		spinner.fail('Failed to load profile');
-		if (error instanceof Error) {
-			console.error(`\nError: ${error.message}`);
-		} else {
-			console.error('\nAn unknown error occurred.');
-		}
+		if (error instanceof Error) console.error(`\nError: ${error.message}`);
+		else console.error('\nAn unknown error occurred.');
 		process.exit(1);
 	}
 };
