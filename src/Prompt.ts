@@ -11,7 +11,7 @@ enum PromptAction {
 
 const choices = [
 	{
-		name: `Send me an ${chalk.green.bold('email')}?`,
+		name: `Send me an ${chalk.cyanBright.bold('email')}?`,
 		value: PromptAction.EMAIL,
 		description: chalk.white.dim.bold('\nSend a message — I promise low-latency replies.'),
 	},
@@ -21,7 +21,7 @@ const choices = [
 		description: chalk.white.dim.bold('\nPulling the latest version of my resume from production.'),
 	},
 	{
-		name: `Schedule a ${chalk.redBright.bold('Meeting')}?`,
+		name: `Schedule a ${chalk.yellowBright.bold('Meeting')}?`,
 		value: PromptAction.MEETING,
 		description: chalk.white.dim.bold('\nScheduling a sync — adding coffee to the calendar... ☕'),
 	},
@@ -32,10 +32,13 @@ const choices = [
 	},
 ];
 
-export default function Prompt(profile) {
+import { UserProfile } from './types.js';
+
+export default function Prompt(profile: UserProfile) {
+	const firstName = profile.personal.name.split(' ')?.[0];
 	const actions = {
 		[PromptAction.EMAIL]: () => {
-			open(`mailto:${profile?.personal?.displayEmail}?subject=Hi%20${profile?.personal?.name?.split?.(' ')?.[0]}!`);
+			open(`mailto:${profile.personal.displayEmail}?subject=Hi%20${firstName}!`);
 			console.log('\n\nEmail launched — preparing witty yet professional response.\n');
 		},
 		[PromptAction.RESUME]: () => {

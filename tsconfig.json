@@ -4,9 +4,16 @@
 		"module": "ESNext",
 		"moduleResolution": "Node",
 		"sourceMap": false,
+		"strict": true,
 		"outDir": "dist",
 		"baseUrl": "src"
 	},
-	"include": ["**/*.ts"],
-	"exclude": ["node_modules", "dist", ".vscode"]
+	"include": [
+		"**/*.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		".vscode"
+	]
 }

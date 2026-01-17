@@ -1,6 +1,6 @@
 {
 	"name": "ritik",
-	"version": "0.0.17",
+	"version": "0.0.15",
 	"type": "module",
 	"description": "CLI Portfolio",
 	"main": "dist/index.js",
@@ -17,22 +17,23 @@
 		"clean": "rm -rf node_modules pnpm-lock.yaml && pnpm install"
 	},
 	"dependencies": {
-		"@inquirer/prompts": "^7.5.3",
+		"@inquirer/prompts": "^8.2.0",
 		"boxen": "^8.0.1",
-		"chalk": "^5.4.1",
-		"open": "^10.1.2"
+		"chalk": "^5.6.2",
+		"open": "^11.0.0",
+		"ora": "^9.0.0"
 	},
 	"devDependencies": {
-		"@types/node": "^22.15.29",
-		"@typescript-eslint/eslint-plugin": "^8.33.0",
-		"@typescript-eslint/parser": "^8.33.0",
-		"esbuild": "^0.25.5",
-		"eslint": "^9.28.0",
-		"eslint-import-resolver-typescript": "^4.4.2",
-		"eslint-plugin-import": "^2.31.0",
-		"rollup": "^4.41.1",
+		"@types/node": "^25.0.9",
+		"@typescript-eslint/eslint-plugin": "^8.53.0",
+		"@typescript-eslint/parser": "^8.53.0",
+		"esbuild": "^0.27.2",
+		"eslint": "^9.39.2",
+		"eslint-import-resolver-typescript": "^4.4.4",
+		"eslint-plugin-import": "^2.32.0",
+		"rollup": "^4.55.1",
 		"rollup-plugin-esbuild": "^6.2.1",
-		"typescript": "^5.8.3"
+		"typescript": "^5.9.3"
 	},
 	"publishConfig": {
 		"access": "public",

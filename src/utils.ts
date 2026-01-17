@@ -16,13 +16,14 @@ const bannerColor = {
 };
 
 export const getBanner = (type: string, label: string, value: string) => {
-	return bannerColor[type]?.dim?.bgWhite?.inverse(`${label.padStart(leftPad, ' ')}:  ${value.padEnd(rightPad, ' ')}`);
+	const color = bannerColor[type as keyof typeof bannerColor] || chalk.white;
+	return color.dim.bgWhite.inverse(`${label.padStart(leftPad, ' ')}:  ${value.padEnd(rightPad, ' ')}`);
 };
 
-export const startCase = (string) => {
+export const startCase = (string: string) => {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export const padCenter = (string, char = ' ') => {
+export const padCenter = (string: string, char = ' ') => {
 	return string.padStart(string.length + Math.floor((totalPad - string.length) / 2), char).padEnd(totalPad, char);
 };

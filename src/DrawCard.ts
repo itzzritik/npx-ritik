@@ -1,6 +1,7 @@
 import boxen from 'boxen';
 import chalk from 'chalk';
 
+import { UserProfile } from './types.js';
 import { getBanner, padCenter, startCase } from './utils.js';
 
 const tip = [`Tip: Try ${chalk.cyanBright.bold('cmd/ctrl + click')} on the links above`, null].join('\n');
@@ -11,13 +12,13 @@ const footer = [
 	'I will make every effort to respond promptly',
 	'My inbox remains open for your correspondence.',
 ];
-export default function DrawCard (profile) {
-	const fName = profile?.personal?.name?.split?.(' ')?.[0];
+export default function DrawCard(profile: UserProfile) {
+	const fName = profile.personal.name.split(' ')?.[0];
 	const website = `https://${profile.personal.displayEmail.replace(/.*@/, '')}`;
 	const CardData = [
 		null,
-		chalk.bold.green(padCenter(profile.personal.name)),
-		chalk.blackBright(padCenter(profile.personal.currentRole)),
+		chalk.bold.cyanBright(padCenter(profile.personal.name)),
+		chalk.whiteBright(padCenter(profile.personal.currentRole)),
 		null,
 	];
 	profile.socialHandles.forEach((social) => {
@@ -35,7 +36,7 @@ export default function DrawCard (profile) {
 		margin: 1,
 		float: 'center',
 		borderStyle: 'single',
-		borderColor: 'green',
+		borderColor: 'cyan',
 	});
 
 	console.log(Card);
