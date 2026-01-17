@@ -16,11 +16,15 @@ To check it out, just pop this into your terminal:
 npx ritik
 ```
 
+<br />
+<br />
+
 ---
 
+<br />
 <div align="center">
 
-**Open Source & Built in Public**
+**Written in the shell with ❤️ by Ritik Srivastava**
 <br>
 Feel free to explore the code, fork it, or even suggest an edit
 <br>
