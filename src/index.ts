@@ -1,7 +1,8 @@
+import updateNotifier from 'update-notifier';
 import ora from 'ora';
 import chalk from 'chalk';
 
-import { version } from '../package.json';
+import packageJson from '../package.json';
 import { CONFIG, DEFAULT_CLI_CONFIG } from './config.js';
 import DrawCard from './DrawCard.js';
 import Prompt from './Prompt.js';
@@ -9,6 +10,7 @@ import { UserProfile } from './types.js';
 
 const run = async () => {
 	console.clear();
+	updateNotifier({ pkg: packageJson }).notify();
 	const spinner = ora('Fetching profile data...').start();
 
 	try {
@@ -29,7 +31,7 @@ const run = async () => {
 			},
 		};
 
-		spinner.succeed(`Profile loaded (${chalk.dim(`v${version}`)})`);
+		spinner.succeed(`Profile loaded (${chalk.dim(`v${packageJson.version}`)})`);
 
 		DrawCard(profile);
 		Prompt(profile);
