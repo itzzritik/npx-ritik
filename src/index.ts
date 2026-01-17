@@ -2,6 +2,7 @@ import ora from 'ora';
 import chalk from 'chalk';
 
 import { version } from '../package.json';
+import { CONFIG, DEFAULT_CLI_CONFIG } from './config.js';
 import DrawCard from './DrawCard.js';
 import Prompt from './Prompt.js';
 import { UserProfile } from './types.js';
@@ -11,11 +12,23 @@ const run = async () => {
 	const spinner = ora('Fetching profile data...').start();
 
 	try {
-		const response = await fetch('https://raw.githubusercontent.com/itzzritik/ItzzRitik/main/profile/profile.json');
+		const response = await fetch(CONFIG.profileUrl);
 		if (!response.ok) {
 			throw new Error(`Failed to fetch profile: ${response.statusText}`);
 		}
 		const profile: UserProfile = await response.json();
+
+		profile.config = {
+			theme: { ...DEFAULT_CLI_CONFIG.theme, ...profile.config?.theme },
+			ui: { ...DEFAULT_CLI_CONFIG.ui, ...profile.config?.ui },
+			messages: {
+				email: { ...DEFAULT_CLI_CONFIG.messages?.email, ...profile.config?.messages?.email },
+				resume: { ...DEFAULT_CLI_CONFIG.messages?.resume, ...profile.config?.messages?.resume },
+				meeting: { ...DEFAULT_CLI_CONFIG.messages?.meeting, ...profile.config?.messages?.meeting },
+				exit: { ...DEFAULT_CLI_CONFIG.messages?.exit, ...profile.config?.messages?.exit },
+			},
+		};
+
 		spinner.succeed(`Profile loaded (${chalk.dim(`v${version}`)})`);
 
 		DrawCard(profile);

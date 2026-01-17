@@ -4,47 +4,43 @@ import chalk from 'chalk';
 import { UserProfile } from './types.js';
 import { getBanner, padCenter, startCase } from './utils.js';
 
-const tip = [`Tip: Try ${chalk.cyanBright.bold('cmd/ctrl + click')} on the links above`, null].join('\n');
-
-const footer = [
-	'I am actively seeking new opportunities and welcome any inquiries',
-	'Please feel free to contact me for questions or casual greetings',
-	'I will make every effort to respond promptly',
-	'My inbox remains open for your correspondence.',
-];
 export default function DrawCard(profile: UserProfile) {
+	const { theme, ui } = profile.config!;
 	const fName = profile.personal.name.split(' ')?.[0];
-	const website = `https://${profile.personal.displayEmail.replace(/.*@/, '')}`;
+	const website = profile.personal.website || `https://${profile.personal.displayEmail.replace(/.*@/, '')}`;
+
+	const primaryColor = (chalk as any)[theme!.primary!] || chalk.cyanBright;
+	const secondaryColor = (chalk as any)[theme!.secondary!] || chalk.whiteBright;
+
 	const CardData = [
 		null,
-		chalk.bold.cyanBright(padCenter(profile.personal.name)),
-		chalk.whiteBright(padCenter(profile.personal.currentRole)),
+		chalk.bold(primaryColor(padCenter(profile.personal.name))),
+		secondaryColor(padCenter(profile.personal.currentRole)),
 		null,
 	];
-	const safeColors: Record<string, string> = {
-		github: '#666666',
-		x: '#1DA1F2',
-	};
 
 	profile.socialHandles.forEach((social) => {
-		const color = safeColors[social.platform] || social.color;
+		const color = social.color;
 		CardData.push(getBanner(startCase(social.platform), `${social.url}/${social.handle}`, color));
 	});
-	CardData.push(getBanner('Portfolio', website, '#f1c40f'));
-	CardData.push(getBanner('Npx', `npx ${fName.toLowerCase()}`, '#cb3837'));
+	CardData.push(getBanner(ui!.title!, website, theme!.accent!));
+	CardData.push(getBanner(ui!.npx!, profile.personal.npx || `npx ${fName.toLowerCase()}`, '#cb3837'));
 	CardData.push(null);
-	footer.forEach((line) => {
-		CardData.push(chalk.italic.whiteBright(padCenter(line)));
-	});
+
+	if (ui?.footer) {
+		ui.footer.forEach((line) => {
+			CardData.push(chalk.italic(secondaryColor(padCenter(line))));
+		});
+	}
 	CardData.push(null);
 
 	const Card = boxen(CardData.join('\n'), {
 		margin: 1,
 		float: 'center',
-		borderStyle: 'single',
-		borderColor: 'cyan',
+		borderStyle: theme!.borderStyle as any,
+		borderColor: theme!.borderColor as any,
 	});
 
 	console.log(Card);
-	console.log(tip);
+	console.log(ui!.cmdTip!);
 }
