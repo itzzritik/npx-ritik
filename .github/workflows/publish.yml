@@ -76,6 +76,8 @@ jobs:
 
             - name: Generate Demo Screenshot 📸
               run: |
+                  sudo wget -q -O /usr/local/bin/ttyd https://github.com/tsl0922/ttyd/releases/download/1.7.7/ttyd.x86_64
+                  sudo chmod +x /usr/local/bin/ttyd
                   mkdir -p /etc/apt/keyrings
                   curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
                   echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
