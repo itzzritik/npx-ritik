@@ -3,10 +3,10 @@ import chalk from 'chalk';
 import open from 'open';
 
 enum PromptAction {
-    EMAIL = 'email',
-    RESUME = 'resume',
-    MEETING = 'meeting',
-    EXIT = 'exit'
+	EMAIL = 'email',
+	RESUME = 'resume',
+	MEETING = 'meeting',
+	EXIT = 'exit',
 }
 
 const choices = [
@@ -32,18 +32,18 @@ const choices = [
 	},
 ];
 
-export default function Prompt (profile) {
+export default function Prompt(profile) {
 	const actions = {
 		[PromptAction.EMAIL]: () => {
 			open(`mailto:${profile?.personal?.displayEmail}?subject=Hi%20${profile?.personal?.name?.split?.(' ')?.[0]}!`);
 			console.log('\n\nEmail launched — preparing witty yet professional response.\n');
 		},
 		[PromptAction.RESUME]: () => {
-			open('https://ritik.me/cv');
+			open('https://cv.ritik.me');
 			console.log('\n\nThanks for reading — hope my resume speaks your language.\n');
 		},
 		[PromptAction.MEETING]: () => {
-			open('https://calendly.com/itzzritik/hello');
+			open('https://huddle.ritik.me');
 			console.log('\n\nMeeting scheduled — time to build something great together.\n');
 		},
 		[PromptAction.EXIT]: () => {
