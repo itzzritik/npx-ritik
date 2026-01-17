@@ -4,9 +4,9 @@
 
 ## Overview
 
-A CLI first approach to the personal portfolio, designed to live native in the terminal. Instead of serving static HTML, this tool operates as a dynamic utility that renders professional profile data directly in the shell.
+A CLI-first personal portfolio that runs right inside the terminal. Instead of a static website, this is a small utility that prints my profile directly in the shell
 
-It eliminates the friction of context switching by bringing the portfolio into the developer's primary workspace. Data is fetched dynamically at runtime, ensuring that role information, social presence, and contact details are always synchronized with the source of truth, presented in a clean, box-rendered interface.
+It is designed to live where developers already spend most of their time. The data is fetched dynamically at runtime, so things like my role, socials, and contact info are always up to date. Everything is shown in a clean, box-style layout that feels native to the terminal
 
 ## Usage
 
