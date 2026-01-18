@@ -23,11 +23,7 @@ npx ritik
 
 <br />
 <div align="center">
-
-**Written in the shell with ❤️ by Ritik Srivastava**
-<br>
-Feel free to explore the code, fork it, or even suggest an edit
-<br>
-<i>If you appreciate this CLI first approach, a star on GitHub is always welcome</i>
-
+Crafted with ❤️ for the terminal
+<br />
+<i>If you appreciate this CLI first approach, a star on GitHub is greatly appreciated</i>
 </div>
