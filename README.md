@@ -1,6 +1,6 @@
 # NPX Ritik
 
-![CLI Portfolio Demo](./demo.png)
+![CLI Portfolio Demo](./demo/demo.png)
 
 ## Overview
 
