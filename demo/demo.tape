@@ -1,10 +1,12 @@
-Set FontSize 24
-Set Width 2000
-Set Height 1600
-Set Padding 50
+Set FontSize 12
+Set Width 1200
+Set Height 880
+Set Padding 20
+Set Margin 40
+Set MarginFill "#674EFF"
 Set Theme "UltraDark"
 Set WindowBar Colorful
-Set BorderRadius 12
+Set BorderRadius 20
 Set LineHeight 1.2
 
 Hide
