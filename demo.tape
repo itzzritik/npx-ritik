@@ -42,8 +42,8 @@
 
 # Output demo.gif
 Set FontSize 16
-Set Width 1400
-Set Height 1000
+Set Width 1300
+Set Height 900
 Set Padding 40
 Set Theme "Catppuccin Macchiato"
 Set WindowBar Colorful
