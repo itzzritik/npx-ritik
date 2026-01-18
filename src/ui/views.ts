@@ -1,13 +1,10 @@
 import boxen from 'boxen';
 import { select } from '@inquirer/prompts';
 import figlet from 'figlet';
-import ansiShadow from 'figlet/importable-fonts/ANSI Shadow.js';
 import { chalk } from './theme.js';
 import { UserProfile } from '../core/types.js';
 import { padCenter, startCase } from './components.js';
 import { openUrl } from '../services/system.js';
-
-figlet.parseFont('ANSI Shadow', ansiShadow);
 
 export const drawCard = (profile: UserProfile) => {
 	const { theme, ui } = profile.config!;
@@ -57,7 +54,7 @@ export const drawCard = (profile: UserProfile) => {
 	console.log(ui!.cmdTip!);
 };
 
-enum PromptAction {
+enum Action {
 	EMAIL = 'email',
 	RESUME = 'resume',
 	MEETING = 'meeting',
@@ -65,45 +62,44 @@ enum PromptAction {
 }
 
 export const promptAction = (profile: UserProfile) => {
-	const { messages, theme } = profile.config!;
-	const primary = (chalk as any)[theme!.primary!] || chalk.cyanBright;
-	const secondary = (chalk as any)[theme!.secondary!] || chalk.whiteBright;
-	const msgs = messages!;
+	const { messages: msgs, theme } = profile.config!;
+	const [primary, secondary] = [theme!.primary, theme!.secondary].map((c) => (chalk as any)[c!] || chalk.whiteBright);
 
-	type MsgKey = keyof typeof msgs;
+	const createChoice = (value: Action, search?: string) => {
+		const item = (msgs as any)[value];
+		const message = item?.message || '';
+		const description = item?.description || '';
 
-	const createChoice = (key: MsgKey, value: PromptAction, search?: string) => {
-		const item = msgs[key]!;
 		return {
-			name: search ? item.message!.replace(search, primary(search)) : item.message!,
+			name: search ? message.replace(search, primary(search)) : message,
 			value,
-			description: secondary('\n' + item.description),
+			description: secondary('\n' + description),
 		};
 	};
 
 	const actions = {
-		[PromptAction.EMAIL]: () => {
+		[Action.EMAIL]: () => {
 			openUrl(`mailto:${profile.personal.displayEmail}?subject=Hi%20${profile.personal.name.split(' ')?.[0]}!`);
-			console.log(`\n\n${messages!.email!.success}\n`);
+			console.log(`\n\n${msgs!.email!.success}\n`);
 		},
-		[PromptAction.RESUME]: () => {
+		[Action.RESUME]: () => {
 			openUrl(profile.personal.resume || 'https://cv.ritik.me');
-			console.log(`\n\n${messages!.resume!.success}\n`);
+			console.log(`\n\n${msgs!.resume!.success}\n`);
 		},
-		[PromptAction.MEETING]: () => {
+		[Action.MEETING]: () => {
 			openUrl(profile.personal.meeting || 'https://meet.ritik.me');
-			console.log(`\n\n${messages!.meeting!.success}\n`);
+			console.log(`\n\n${msgs!.meeting!.success}\n`);
 		},
-		[PromptAction.EXIT]: () => console.log(`\n\n${messages!.exit!.success}\n`),
+		[Action.EXIT]: () => console.log(`\n\n${msgs!.exit!.success}\n`),
 	};
 
 	select({
 		message: 'Choose an Action',
 		choices: [
-			createChoice('email', PromptAction.EMAIL, 'email'),
-			createChoice('resume', PromptAction.RESUME, 'Resume'),
-			createChoice('meeting', PromptAction.MEETING, 'Meeting'),
-			createChoice('exit', PromptAction.EXIT),
+			createChoice(Action.EMAIL, 'email'),
+			createChoice(Action.RESUME, 'Resume'),
+			createChoice(Action.MEETING, 'Meeting'),
+			createChoice(Action.EXIT),
 		],
 	}).then((answer) => actions[answer]());
 };

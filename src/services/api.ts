@@ -18,3 +18,8 @@ export const fetchProfile = async (): Promise<UserProfile> => {
 
 	return profile;
 };
+
+export const loadFont = async () => {
+	const font = await fetch('https://raw.githubusercontent.com/patorjk/figlet.js/master/fonts/ANSI%20Shadow.flf').then((r) => r.text());
+	(await import('figlet')).default.parseFont('ANSI Shadow', font);
+};

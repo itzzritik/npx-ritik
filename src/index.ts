@@ -1,7 +1,6 @@
 import packageJson from '../package.json';
 import { DEFAULT_CLI_CONFIG } from './core/config.js';
-import { UserProfile } from './core/types.js';
-import { fetchProfile } from './services/api.js';
+import { fetchProfile, loadFont } from './services/api.js';
 import { ensureLatest } from './services/updater.js';
 import { Spinner } from './ui/components.js';
 import { chalk } from './ui/theme.js';
@@ -10,10 +9,10 @@ import { drawCard, promptAction } from './ui/views.js';
 const run = async () => {
 	console.clear();
 	if (ensureLatest(packageJson.name)) return;
-	const spinner = new Spinner('Fetching profile data...').start();
+	const spinner = new Spinner('Fetching data...').start();
 
 	try {
-		const profile: UserProfile = await fetchProfile();
+		const [profile] = await Promise.all([fetchProfile(), loadFont()]);
 
 		profile.config = {
 			theme: { ...DEFAULT_CLI_CONFIG.theme, ...profile.config?.theme },
@@ -26,7 +25,7 @@ const run = async () => {
 			},
 		};
 
-		spinner.succeed(`Profile loaded (${chalk.dim(`v${packageJson.version}`)})`);
+		spinner.succeed(`Welcome to ${profile.personal.name.split(' ')?.[0]}'s Cli Portfolio ${chalk.dim(`- v${packageJson.version}`)}`);
 		drawCard(profile);
 		promptAction(profile);
 	} catch (error) {

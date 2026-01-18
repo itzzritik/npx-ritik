@@ -14,7 +14,7 @@ export const DEFAULT_CLI_CONFIG: CLIConfig = {
 	},
 	ui: {
 		title: 'Portfolio',
-		npx: 'Npx',
+		npx: 'Cli Portfolio',
 		cmdTip: 'Tip: Try cmd/ctrl + click on the links above',
 		footer: [
 			'Open to meaningful conversations and interesting opportunities',
