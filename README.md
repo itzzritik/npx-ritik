@@ -13,7 +13,7 @@ The tool fetches data dynamically at runtime, ensuring roles, social links, and 
 To check it out, just pop this into your terminal:
 
 ```bash
-npx ritik
+npx ritik -y
 ```
 
 <br />
