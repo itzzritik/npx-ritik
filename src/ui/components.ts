@@ -1,4 +1,4 @@
-import { chalk } from './theme.js';
+import chalk from 'chalk';
 
 const leftPad = 22;
 const rightPad = 80;

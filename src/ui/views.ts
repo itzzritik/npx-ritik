@@ -1,7 +1,7 @@
 import boxen from 'boxen';
 import { select } from '@inquirer/prompts';
 import figlet from 'figlet';
-import { chalk } from './theme.js';
+import chalk from 'chalk';
 import { UserProfile } from '../core/types.js';
 import { padCenter, startCase } from './components.js';
 import { openUrl } from '../services/system.js';

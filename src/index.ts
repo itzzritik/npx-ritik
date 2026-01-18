@@ -3,7 +3,7 @@ import { DEFAULT_CLI_CONFIG } from './core/config.js';
 import { fetchProfile, loadFont } from './services/api.js';
 import { ensureLatest } from './services/updater.js';
 import { Spinner } from './ui/components.js';
-import { chalk } from './ui/theme.js';
+import chalk from 'chalk';
 import { drawCard, promptAction } from './ui/views.js';
 
 const run = async () => {
