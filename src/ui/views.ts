@@ -4,79 +4,56 @@ import figlet from 'figlet';
 import ansiShadow from 'figlet/importable-fonts/ANSI Shadow.js';
 import { chalk } from './theme.js';
 import { UserProfile } from '../core/types.js';
-import { getBanner, padCenter, startCase } from './components.js';
+import { padCenter, startCase } from './components.js';
 import { openUrl } from '../services/system.js';
 
 figlet.parseFont('ANSI Shadow', ansiShadow);
 
 export const drawCard = (profile: UserProfile) => {
 	const { theme, ui } = profile.config!;
-	const fName = profile.personal.name.split(' ')?.[0];
-	const website = profile.personal.website || `https://${profile.personal.displayEmail.replace(/.*@/, '')}`;
+	const { name, website, displayEmail, currentRole, npx } = profile.personal;
+	const fName = name.split(' ')?.[0];
+	const site = website || `https://${displayEmail.replace(/.*@/, '')}`;
 	const secondaryColor = (chalk as any)[theme!.secondary!] || chalk.whiteBright;
-	const asciiName = figlet.textSync(profile.personal.name.toUpperCase().replace(' ', '\n'), { font: 'ANSI Shadow' });
+	const asciiName = figlet.textSync(name.toUpperCase().replace(' ', '\n'), { font: 'ANSI Shadow' });
+
+	const bannerItems = [
+		...profile.socialHandles.map((s) => ({
+			label: startCase(s.platform),
+			value: `${s.url}/${s.handle}`,
+			color: s.color,
+		})),
+		{ label: ui!.title!, value: site, color: theme!.accent! },
+		{ label: ui!.npx!, value: npx || `npx ${fName.toLowerCase()}`, color: '#cb3837' },
+	];
+
+	const maxLabelLen = Math.max(...bannerItems.map((i) => i.label.length));
+	const maxValueLen = Math.max(...bannerItems.map((i) => i.value.length));
 
 	const CardData = [
 		null,
 		...asciiName.split('\n').map((line) => chalk.bold.whiteBright(padCenter(line))),
-		secondaryColor(padCenter(profile.personal.currentRole.toUpperCase())),
+		secondaryColor(padCenter(currentRole.toUpperCase())),
+		null,
+		...bannerItems.map((item) => {
+			const label = item.label.padEnd(maxLabelLen, ' ');
+			const value = item.value.padEnd(maxValueLen, ' ');
+			return chalk.hex(item.color).bgWhiteBright.inverse(padCenter(`  ${label} :  ${value}  `));
+		}),
+		null,
+		...(ui?.footer?.map((line) => chalk.italic(secondaryColor(padCenter(line)))) || []),
 		null,
 	];
 
-	type BannerItem = { label: string; value: string; color: string };
-	const bannerItems: BannerItem[] = [];
-
-	profile.socialHandles.forEach((social) => {
-		bannerItems.push({
-			label: startCase(social.platform),
-			value: `${social.url}/${social.handle}`,
-			color: social.color,
-		});
-	});
-	bannerItems.push({ label: ui!.title!, value: website, color: theme!.accent! });
-	bannerItems.push({ label: ui!.npx!, value: profile.personal.npx || `npx ${fName.toLowerCase()}`, color: '#cb3837' });
-
-	const maxLabelLen = Math.max(...bannerItems.map((item) => item.label.length));
-	const maxValueLen = Math.max(...bannerItems.map((item) => item.value.length));
-
-	// Total width matching the original specific dimensions (22 + 80 + 2) from components.ts
-	// We want the background to span this full width.
-	const totalWidth = 104;
-
-	bannerItems.forEach((item) => {
-		const label = item.label.padEnd(maxLabelLen, ' ');
-		const value = item.value.padEnd(maxValueLen, ' ');
-
-		// Create the content block
-		const content = `  ${label} :  ${value}  `;
-
-		// Center the content within the total width
-		const remainingSpace = Math.max(0, totalWidth - content.length);
-		const leftPad = Math.floor(remainingSpace / 2);
-		const rightPad = remainingSpace - leftPad;
-
-		const color = chalk.hex(item.color);
-		CardData.push(color.bgWhiteBright.inverse(''.padStart(leftPad, ' ') + content + ''.padEnd(rightPad, ' ')));
-	});
-
-	CardData.push(null);
-
-	if (ui?.footer) {
-		ui.footer.forEach((line) => {
-			CardData.push(chalk.italic(secondaryColor(padCenter(line))));
-		});
-	}
-	CardData.push(null);
-
-	const Card = boxen(CardData.join('\n'), {
-		margin: 1,
-		float: 'center',
-		textAlignment: 'center',
-		borderStyle: theme!.borderStyle as any,
-		borderColor: theme!.borderColor as any,
-	});
-
-	console.log(Card);
+	console.log(
+		boxen(CardData.join('\n'), {
+			margin: 1,
+			float: 'center',
+			textAlignment: 'center',
+			borderStyle: theme!.borderStyle as any,
+			borderColor: theme!.borderColor as any,
+		}),
+	);
 	console.log(ui!.cmdTip!);
 };
 
@@ -88,38 +65,25 @@ enum PromptAction {
 }
 
 export const promptAction = (profile: UserProfile) => {
-	const firstName = profile.personal.name.split(' ')?.[0];
 	const { messages, theme } = profile.config!;
+	const primary = (chalk as any)[theme!.primary!] || chalk.cyanBright;
+	const secondary = (chalk as any)[theme!.secondary!] || chalk.whiteBright;
+	const msgs = messages!;
 
-	const primaryColor = (chalk as any)[theme!.primary!] || chalk.cyanBright;
-	const secondaryColor = (chalk as any)[theme!.secondary!] || chalk.whiteBright;
+	type MsgKey = keyof typeof msgs;
 
-	const choices = [
-		{
-			name: messages!.email!.message!.replace('email', primaryColor('email')),
-			value: PromptAction.EMAIL,
-			description: secondaryColor('\n' + messages!.email!.description),
-		},
-		{
-			name: messages!.resume!.message!.replace('Resume', primaryColor('Resume')),
-			value: PromptAction.RESUME,
-			description: secondaryColor('\n' + messages!.resume!.description),
-		},
-		{
-			name: messages!.meeting!.message!.replace('Meeting', primaryColor('Meeting')),
-			value: PromptAction.MEETING,
-			description: secondaryColor('\n' + messages!.meeting!.description),
-		},
-		{
-			name: messages!.exit!.message!,
-			value: PromptAction.EXIT,
-			description: secondaryColor('\n' + messages!.exit!.description),
-		},
-	];
+	const createChoice = (key: MsgKey, value: PromptAction, search?: string) => {
+		const item = msgs[key]!;
+		return {
+			name: search ? item.message!.replace(search, primary(search)) : item.message!,
+			value,
+			description: secondary('\n' + item.description),
+		};
+	};
 
 	const actions = {
 		[PromptAction.EMAIL]: () => {
-			openUrl(`mailto:${profile.personal.displayEmail}?subject=Hi%20${firstName}!`);
+			openUrl(`mailto:${profile.personal.displayEmail}?subject=Hi%20${profile.personal.name.split(' ')?.[0]}!`);
 			console.log(`\n\n${messages!.email!.success}\n`);
 		},
 		[PromptAction.RESUME]: () => {
@@ -130,13 +94,16 @@ export const promptAction = (profile: UserProfile) => {
 			openUrl(profile.personal.meeting || 'https://meet.ritik.me');
 			console.log(`\n\n${messages!.meeting!.success}\n`);
 		},
-		[PromptAction.EXIT]: () => {
-			console.log(`\n\n${messages!.exit!.success}\n`);
-		},
+		[PromptAction.EXIT]: () => console.log(`\n\n${messages!.exit!.success}\n`),
 	};
 
 	select({
 		message: 'Choose an Action',
-		choices,
+		choices: [
+			createChoice('email', PromptAction.EMAIL, 'email'),
+			createChoice('resume', PromptAction.RESUME, 'Resume'),
+			createChoice('meeting', PromptAction.MEETING, 'Meeting'),
+			createChoice('exit', PromptAction.EXIT),
+		],
 	}).then((answer) => actions[answer]());
 };

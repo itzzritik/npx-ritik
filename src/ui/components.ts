@@ -12,11 +12,6 @@ export const startCase = (string: string) => {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export const getBanner = (label: string, value: string, hexColor: string) => {
-	const color = chalk.hex(hexColor);
-	return color.bgWhiteBright.inverse(`${label.padStart(leftPad, ' ')}:  ${value.padEnd(rightPad, ' ')}`);
-};
-
 export class Spinner {
 	private frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
 	private interval: NodeJS.Timeout | null = null;
