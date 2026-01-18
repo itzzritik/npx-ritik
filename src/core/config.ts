@@ -24,17 +24,17 @@ export const DEFAULT_CLI_CONFIG: CLIConfig = {
 	},
 	messages: {
 		email: {
-			message: 'Send me an email?',
+			message: 'Send me an email',
 			description: 'Send a message — I promise low-latency replies.',
 			success: 'Email launched — preparing witty yet professional response.',
 		},
 		resume: {
-			message: 'Checkout my Resume?',
+			message: 'Checkout my Resume',
 			description: 'Pulling the latest version of my resume from production.',
 			success: 'Thanks for reading — hope my resume speaks your language.',
 		},
 		meeting: {
-			message: 'Schedule a Meeting?',
+			message: 'Schedule a Meeting',
 			description: 'Scheduling a sync — adding coffee to the calendar... ☕',
 			success: 'Meeting scheduled — time to build something great together.',
 		},

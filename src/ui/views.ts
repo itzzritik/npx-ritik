@@ -35,7 +35,7 @@ export const drawCard = (profile: UserProfile) => {
 		...bannerItems.map((item) => {
 			const label = item.label.padEnd(maxLabelLen, ' ');
 			const value = item.value.padEnd(maxValueLen, ' ');
-			return chalk.hex(item.color).bgWhiteBright.inverse(padCenter(`  ${label} :  ${value}  `));
+			return chalk.bgHex(item.color).whiteBright.bold(padCenter(`  ${label} :  ${value}  `));
 		}),
 		null,
 		...(ui?.footer?.map((line) => chalk.italic(secondaryColor(padCenter(line)))) || []),
