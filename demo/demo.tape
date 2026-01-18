@@ -1,6 +1,6 @@
 Set FontSize 12
 Set Width 1200
-Set Height 880
+Set Height 850
 Set Padding 20
 Set Margin 40
 Set MarginFill "#674EFF"
@@ -14,6 +14,6 @@ Type "node dist/index.js"
 Enter
 Show
 
-Wait+Screen /navigate/
+Wait+Screen /Exit/
 Sleep 1s
 Screenshot demo/demo.png

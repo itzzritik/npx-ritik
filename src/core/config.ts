@@ -39,7 +39,7 @@ export const DEFAULT_CLI_CONFIG: CLIConfig = {
 			success: 'Meeting scheduled — time to build something great together.',
 		},
 		exit: {
-			message: 'Exit.',
+			message: 'Exit',
 			description: 'Ending session, but not the connection.',
 			success: 'Session ended — but DMs are always open.',
 		},

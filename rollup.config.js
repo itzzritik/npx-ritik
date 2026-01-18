@@ -12,7 +12,7 @@ export default {
 		}),
 		commonjs(),
 		json(),
-		esbuild({ minify: true }),
+		esbuild({ minify: true, target: 'node20' }),
 	],
 	output: [
 		{

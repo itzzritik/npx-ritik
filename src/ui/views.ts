@@ -1,5 +1,5 @@
 import boxen from 'boxen';
-import { select } from '@inquirer/prompts';
+import { select } from './input.js';
 import figlet from 'figlet';
 import chalk from 'chalk';
 import { UserProfile } from '../core/types.js';
