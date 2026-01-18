@@ -9,7 +9,7 @@ export const ensureLatest = (pkgName: string) => {
 	const isRedirect = process.env.NPX_RITIK_REDIRECT === 'true';
 
 	if (!isLocal && !isRedirect) {
-		const child = spawn('npx', ['--yes', `${pkgName}@latest`], {
+		const child = spawn(`npx --yes ${pkgName}@latest`, {
 			stdio: 'inherit',
 			shell: true,
 			env: { ...process.env, NPX_RITIK_REDIRECT: 'true' },
