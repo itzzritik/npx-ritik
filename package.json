@@ -1,6 +1,6 @@
 {
 	"name": "ritik",
-	"version": "0.0.35",
+	"version": "1.0.0",
 	"type": "module",
 	"description": "CLI Portfolio",
 	"main": "dist/index.js",
