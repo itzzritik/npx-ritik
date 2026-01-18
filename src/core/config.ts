@@ -24,7 +24,7 @@ export const DEFAULT_CLI_CONFIG: CLIConfig = {
 	},
 	messages: {
 		email: {
-			message: 'Send me an email',
+			message: 'Send me an Email',
 			description: 'Send a message — I promise low-latency replies.',
 			success: 'Email launched — preparing witty yet professional response.',
 		},

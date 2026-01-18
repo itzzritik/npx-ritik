@@ -99,7 +99,7 @@ export const promptAction = (profile: UserProfile) => {
 	select({
 		message: 'Choose an Action',
 		choices: [
-			createChoice(Action.EMAIL, 'email'),
+			createChoice(Action.EMAIL, 'Email'),
 			createChoice(Action.RESUME, 'Resume'),
 			createChoice(Action.MEETING, 'Meeting'),
 			createChoice(Action.EXIT),
