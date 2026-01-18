@@ -8,7 +8,7 @@
 		"ritik": "dist/index.js"
 	},
 	"engines": {
-		"node": ">=14"
+		"node": ">=20"
 	},
 	"scripts": {
 		"build": "rollup -c",
@@ -48,9 +48,21 @@
 	},
 	"keywords": [
 		"ritik",
+		"nodejs",
+		"javascript",
+		"shell",
+		"cli",
+		"console",
+		"open-source",
+		"npm",
 		"portfolio",
-		"npx",
-		"cli"
+		"typescript",
+		"terminal",
+		"command-line",
+		"tui",
+		"dev",
+		"developer",
+		"npx"
 	],
 	"author": {
 		"name": "Ritik Srivastava"
