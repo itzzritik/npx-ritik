@@ -23,12 +23,42 @@ export const drawCard = (profile: UserProfile) => {
 		null,
 	];
 
+	type BannerItem = { label: string; value: string; color: string };
+	const bannerItems: BannerItem[] = [];
+
 	profile.socialHandles.forEach((social) => {
-		const color = social.color;
-		CardData.push(getBanner(startCase(social.platform), `${social.url}/${social.handle}`, color));
+		bannerItems.push({
+			label: startCase(social.platform),
+			value: `${social.url}/${social.handle}`,
+			color: social.color,
+		});
 	});
-	CardData.push(getBanner(ui!.title!, website, theme!.accent!));
-	CardData.push(getBanner(ui!.npx!, profile.personal.npx || `npx ${fName.toLowerCase()}`, '#cb3837'));
+	bannerItems.push({ label: ui!.title!, value: website, color: theme!.accent! });
+	bannerItems.push({ label: ui!.npx!, value: profile.personal.npx || `npx ${fName.toLowerCase()}`, color: '#cb3837' });
+
+	const maxLabelLen = Math.max(...bannerItems.map((item) => item.label.length));
+	const maxValueLen = Math.max(...bannerItems.map((item) => item.value.length));
+
+	// Total width matching the original specific dimensions (22 + 80 + 2) from components.ts
+	// We want the background to span this full width.
+	const totalWidth = 104;
+
+	bannerItems.forEach((item) => {
+		const label = item.label.padEnd(maxLabelLen, ' ');
+		const value = item.value.padEnd(maxValueLen, ' ');
+
+		// Create the content block
+		const content = `  ${label} :  ${value}  `;
+
+		// Center the content within the total width
+		const remainingSpace = Math.max(0, totalWidth - content.length);
+		const leftPad = Math.floor(remainingSpace / 2);
+		const rightPad = remainingSpace - leftPad;
+
+		const color = chalk.hex(item.color);
+		CardData.push(color.bgWhiteBright.inverse(''.padStart(leftPad, ' ') + content + ''.padEnd(rightPad, ' ')));
+	});
+
 	CardData.push(null);
 
 	if (ui?.footer) {

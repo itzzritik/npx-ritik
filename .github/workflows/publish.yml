@@ -82,10 +82,10 @@ jobs:
                   curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
                   echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
                   sudo apt-get update && sudo apt-get install -y vhs
-                  vhs demo.tape
+                  vhs demo/demo.tape
 
             - name: Commit Demo Screenshot 💾
-              run: git add demo.png && git commit -m "🤖 Update demo screenshot" || true
+              run: git add demo/demo.png && git commit -m "🤖 Update demo screenshot" || true
 
             - name: Publishing Package 🚀
               run: npm publish --access public --provenance

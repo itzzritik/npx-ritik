@@ -14,7 +14,8 @@
 		"build": "rollup -c",
 		"start": "rollup -c && node dist/index.js",
 		"lint": "next lint",
-		"clean": "rm -rf node_modules pnpm-lock.yaml && pnpm install"
+		"clean": "rm -rf node_modules pnpm-lock.yaml && pnpm install",
+		"demo": "pnpm run build && vhs demo/demo.tape"
 	},
 	"devDependencies": {
 		"@inquirer/prompts": "^8.2.0",
