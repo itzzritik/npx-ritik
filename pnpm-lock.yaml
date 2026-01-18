@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      figlet:
+        specifier: ^1.9.4
+        version: 1.9.4
     devDependencies:
       '@rollup/plugin-commonjs':
         specifier: ^29.0.0
@@ -47,9 +51,6 @@ importers:
       eslint-plugin-import:
         specifier: ^2.32.0
         version: 2.32.0(@typescript-eslint/parser@8.53.0(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@4.4.4)(eslint@9.39.2)
-      figlet:
-        specifier: ^1.9.4
-        version: 1.9.4
       rollup:
         specifier: ^4.55.1
         version: 4.55.1

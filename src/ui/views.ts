@@ -1,10 +1,13 @@
 import boxen from 'boxen';
 import { select } from './input.js';
 import figlet from 'figlet';
+import ansiShadowFont from 'figlet/importable-fonts/ANSI Shadow.js';
 import chalk from 'chalk';
 import { UserProfile } from '../core/types.js';
 import { padCenter, startCase } from './components.js';
 import { openUrl } from '../services/system.js';
+
+figlet.parseFont('ANSI Shadow', ansiShadowFont);
 
 export const drawCard = (profile: UserProfile) => {
 	const { theme, ui } = profile.config!;

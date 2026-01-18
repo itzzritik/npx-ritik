@@ -1,6 +1,6 @@
 import packageJson from '../package.json';
 import { DEFAULT_CLI_CONFIG } from './core/config.js';
-import { fetchProfile, loadFont } from './services/api.js';
+import { fetchProfile } from './services/api.js';
 import { ensureLatest } from './services/updater.js';
 import { Spinner } from './ui/components.js';
 import chalk from 'chalk';
@@ -12,7 +12,7 @@ const run = async () => {
 	const spinner = new Spinner('Fetching data...').start();
 
 	try {
-		const [profile] = await Promise.all([fetchProfile(), loadFont()]);
+		const profile = await fetchProfile();
 
 		profile.config = {
 			theme: { ...DEFAULT_CLI_CONFIG.theme, ...profile.config?.theme },
