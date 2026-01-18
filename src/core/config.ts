@@ -17,10 +17,9 @@ export const DEFAULT_CLI_CONFIG: CLIConfig = {
 		npx: 'Npx',
 		cmdTip: 'Tip: Try cmd/ctrl + click on the links above',
 		footer: [
-			'I am actively seeking new opportunities and welcome any inquiries',
-			'Please feel free to contact me for questions or casual greetings',
-			'I will make every effort to respond promptly',
-			'My inbox remains open for your correspondence.',
+			'Open to meaningful conversations and interesting opportunities',
+			'Feel free to reach out for questions, collaborations, or a quick hello',
+			'I do my best to respond in a timely manner',
 		],
 	},
 	messages: {

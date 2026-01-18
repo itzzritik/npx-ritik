@@ -1,7 +1,7 @@
 import { chalk } from './theme.js';
 
 const leftPad = 22;
-const rightPad = 52;
+const rightPad = 80;
 const totalPad = leftPad + rightPad + 2;
 
 export const padCenter = (string: string, char = ' ') => {
@@ -14,7 +14,7 @@ export const startCase = (string: string) => {
 
 export const getBanner = (label: string, value: string, hexColor: string) => {
 	const color = chalk.hex(hexColor);
-	return color.dim.bgWhite.inverse(`${label.padStart(leftPad, ' ')}:  ${value.padEnd(rightPad, ' ')}`);
+	return color.bgWhiteBright.inverse(`${label.padStart(leftPad, ' ')}:  ${value.padEnd(rightPad, ' ')}`);
 };
 
 export class Spinner {

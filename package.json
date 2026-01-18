@@ -21,6 +21,7 @@
 		"@rollup/plugin-commonjs": "^29.0.0",
 		"@rollup/plugin-json": "^6.1.0",
 		"@rollup/plugin-node-resolve": "^16.0.3",
+		"@types/figlet": "^1.7.0",
 		"@types/node": "^25.0.9",
 		"@typescript-eslint/eslint-plugin": "^8.53.0",
 		"@typescript-eslint/parser": "^8.53.0",
@@ -57,5 +58,8 @@
 	"bugs": {
 		"url": "https://github.com/itzzritik/npx-ritik/issues"
 	},
-	"homepage": "https://github.com/itzzritik/npx-ritik#readme"
+	"homepage": "https://github.com/itzzritik/npx-ritik#readme",
+	"dependencies": {
+		"figlet": "^1.9.4"
+	}
 }

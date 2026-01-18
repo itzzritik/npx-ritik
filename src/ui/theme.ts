@@ -12,6 +12,7 @@ const ansi = {
 	italic: (s: string) => `${ESC}3m${s}${RESET}`,
 	inverse: (s: string) => `${ESC}7m${s}${RESET}`,
 	bgWhite: (s: string) => `${ESC}47m${s}${RESET}`,
+	bgWhiteBright: (s: string) => `${ESC}107m${s}${RESET}`,
 	cyanBright: (s: string) => `${ESC}96m${s}${RESET}`,
 	whiteBright: (s: string) => `${ESC}97m${s}${RESET}`,
 	hex: (hex: string) => {
@@ -22,7 +23,7 @@ const ansi = {
 
 const createChainer = (baseStyle: (s: string) => string = (s) => s) => {
 	const proxy: any = (s: string) => baseStyle(s);
-	const styles = ['dim', 'bold', 'italic', 'inverse', 'bgWhite', 'cyanBright', 'whiteBright'];
+	const styles = ['dim', 'bold', 'italic', 'inverse', 'bgWhite', 'bgWhiteBright', 'cyanBright', 'whiteBright'];
 	styles.forEach((style) => {
 		Object.defineProperty(proxy, style, {
 			get: () => {

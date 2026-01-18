@@ -1,22 +1,25 @@
 import boxen from 'boxen';
 import { select } from '@inquirer/prompts';
+import figlet from 'figlet';
+import ansiShadow from 'figlet/importable-fonts/ANSI Shadow.js';
 import { chalk } from './theme.js';
 import { UserProfile } from '../core/types.js';
 import { getBanner, padCenter, startCase } from './components.js';
 import { openUrl } from '../services/system.js';
 
+figlet.parseFont('ANSI Shadow', ansiShadow);
+
 export const drawCard = (profile: UserProfile) => {
 	const { theme, ui } = profile.config!;
 	const fName = profile.personal.name.split(' ')?.[0];
 	const website = profile.personal.website || `https://${profile.personal.displayEmail.replace(/.*@/, '')}`;
-
-	const primaryColor = (chalk as any)[theme!.primary!] || chalk.cyanBright;
 	const secondaryColor = (chalk as any)[theme!.secondary!] || chalk.whiteBright;
+	const asciiName = figlet.textSync(profile.personal.name.toUpperCase().replace(' ', '\n'), { font: 'ANSI Shadow' });
 
 	const CardData = [
 		null,
-		chalk.bold(primaryColor(padCenter(profile.personal.name))),
-		secondaryColor(padCenter(profile.personal.currentRole)),
+		...asciiName.split('\n').map((line) => chalk.bold.whiteBright(padCenter(line))),
+		secondaryColor(padCenter(profile.personal.currentRole.toUpperCase())),
 		null,
 	];
 
@@ -38,6 +41,7 @@ export const drawCard = (profile: UserProfile) => {
 	const Card = boxen(CardData.join('\n'), {
 		margin: 1,
 		float: 'center',
+		textAlignment: 'center',
 		borderStyle: theme!.borderStyle as any,
 		borderColor: theme!.borderColor as any,
 	});
