@@ -25,7 +25,8 @@ const run = async () => {
 			ui: { ...DEFAULT_CLI_CONFIG.ui, ...profile.config?.ui },
 		};
 
-		spinner.succeed(`Welcome to ${profile.personal.name.split(" ")?.[0]}'s Cli Portfolio ${chalk.dim(`- v${packageJson.version}`)}`);
+		const cacheTag = profile.isCached ? chalk.yellow(" (cached)") : "";
+		spinner.succeed(`Welcome to ${profile.personal.name.split(" ")?.[0]}'s Cli Portfolio ${chalk.dim(`- v${packageJson.version}`)}${cacheTag}`);
 		drawCard(profile);
 		promptAction(profile);
 	} catch (error) {

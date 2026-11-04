@@ -29,6 +29,7 @@ export interface CLIConfig {
 
 export interface UserProfile {
 	config?: CLIConfig;
+	isCached?: boolean;
 	personal: {
 		name: string;
 		currentRole: string;
