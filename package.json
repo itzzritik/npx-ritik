@@ -41,27 +41,21 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "rollup -c",
+		"build": "bun build src/index.ts --target=node --minify --banner=\"#!/usr/bin/env node\" --outfile=dist/index.js --external=figlet",
 		"check": "ultracite check",
 		"clean": "rm -rf node_modules bun.lock dist && bun install",
 		"demo": "bun run build && vhs demo/demo.tape",
 		"fix": "ultracite fix",
-		"start": "rollup -c && node dist/index.js"
+		"start": "bun run build && node dist/index.js"
 	},
 	"dependencies": {
 		"figlet": "^1.12.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.6.4",
-		"@rollup/plugin-commonjs": "^29.0.3",
-		"@rollup/plugin-json": "^6.1.0",
-		"@rollup/plugin-node-resolve": "^16.0.3",
 		"@types/node": "^26.6.6",
 		"boxen": "^9.0.0",
 		"chalk": "^6.0.1",
-		"esbuild": "^0.28.2",
-		"rollup": "^4.67.5",
-		"rollup-plugin-esbuild": "^6.2.1",
 		"typescript": "^7.0.2",
 		"ultracite": "^8.1.1"
 	},
