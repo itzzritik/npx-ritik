@@ -1,54 +1,7 @@
 {
 	"name": "ritik",
 	"version": "1.0.12",
-	"type": "module",
 	"description": "CLI Portfolio",
-	"main": "dist/index.js",
-	"bin": {
-		"ritik": "dist/index.js"
-	},
-	"engines": {
-		"node": ">=20"
-	},
-	"scripts": {
-		"build": "rollup -c",
-		"start": "rollup -c && node dist/index.js",
-		"lint": "next lint",
-		"clean": "rm -rf node_modules pnpm-lock.yaml && pnpm install",
-		"demo": "pnpm run build && vhs demo/demo.tape"
-	},
-	"dependencies": {
-		"figlet": "^1.9.4"
-	},
-	"devDependencies": {
-		"@rollup/plugin-commonjs": "^29.0.0",
-		"@rollup/plugin-json": "^6.1.0",
-		"@rollup/plugin-node-resolve": "^16.0.3",
-		"@types/figlet": "^1.7.0",
-		"@types/node": "^25.0.9",
-		"@typescript-eslint/eslint-plugin": "^8.53.0",
-		"@typescript-eslint/parser": "^8.53.0",
-		"boxen": "^8.0.1",
-		"chalk": "^5.6.2",
-		"esbuild": "^0.27.2",
-		"eslint": "^9.39.2",
-		"eslint-import-resolver-typescript": "^4.4.4",
-		"eslint-plugin-import": "^2.32.0",
-		"rollup": "^4.55.1",
-		"rollup-plugin-esbuild": "^6.2.1",
-		"typescript": "^5.9.3"
-	},
-	"publishConfig": {
-		"access": "public",
-		"registry": "https://registry.npmjs.org/"
-	},
-	"files": [
-		"dist"
-	],
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/itzzritik/npx-ritik.git"
-	},
 	"keywords": [
 		"ritik",
 		"nodejs",
@@ -67,12 +20,57 @@
 		"developer",
 		"npx"
 	],
-	"author": {
-		"name": "Ritik Srivastava"
-	},
-	"license": "ISC",
+	"homepage": "https://github.com/itzzritik/npx-ritik#readme",
 	"bugs": {
 		"url": "https://github.com/itzzritik/npx-ritik/issues"
 	},
-	"homepage": "https://github.com/itzzritik/npx-ritik#readme"
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/itzzritik/npx-ritik.git"
+	},
+	"license": "ISC",
+	"author": {
+		"name": "Ritik Srivastava"
+	},
+	"type": "module",
+	"main": "dist/index.js",
+	"bin": {
+		"ritik": "dist/index.js"
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "rollup -c",
+		"check": "ultracite check",
+		"clean": "rm -rf node_modules bun.lock dist && bun install",
+		"demo": "bun run build && vhs demo/demo.tape",
+		"fix": "ultracite fix",
+		"start": "rollup -c && node dist/index.js"
+	},
+	"dependencies": {
+		"figlet": "^1.12.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.6.4",
+		"@rollup/plugin-commonjs": "^29.0.3",
+		"@rollup/plugin-json": "^6.1.0",
+		"@rollup/plugin-node-resolve": "^16.0.3",
+		"@types/node": "^26.6.6",
+		"boxen": "^9.0.0",
+		"chalk": "^6.0.1",
+		"esbuild": "^0.28.2",
+		"rollup": "^4.67.5",
+		"rollup-plugin-esbuild": "^6.2.1",
+		"typescript": "^7.0.2",
+		"ultracite": "^8.1.1"
+	},
+	"packageManager": "bun@1.4.4",
+	"engines": {
+		"node": ">=20"
+	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	}
 }

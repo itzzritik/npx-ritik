@@ -3,4 +3,5 @@ demo.png
 src
 rollup.config.js
 tsconfig.json
-pnpm-lock.yaml
+bun.lock
+biome.json

@@ -10,12 +10,6 @@
 		"outDir": "dist",
 		"baseUrl": "src"
 	},
-	"include": [
-		"**/*.ts"
-	],
-	"exclude": [
-		"node_modules",
-		"dist",
-		".vscode"
-	]
+	"include": ["**/*.ts"],
+	"exclude": ["node_modules", "dist", ".vscode"]
 }
