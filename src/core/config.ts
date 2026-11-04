@@ -1,47 +1,47 @@
-import { CLIConfig } from './types.js';
+import type { CLIConfig } from "./types.js";
 
 export const CONFIG = {
-	profileUrl: 'https://raw.githubusercontent.com/itzzritik/itzzritik/refs/heads/main/profile/profile.json',
+	profileUrl: "https://raw.githubusercontent.com/itzzritik/itzzritik/refs/heads/main/profile/profile.json",
 };
 
 export const DEFAULT_CLI_CONFIG: CLIConfig = {
-	theme: {
-		primary: 'cyanBright',
-		secondary: 'whiteBright',
-		accent: '#f1c40f',
-		borderStyle: 'single',
-		borderColor: 'cyan',
-	},
-	ui: {
-		title: 'Portfolio',
-		npx: 'Cli Portfolio',
-		cmdTip: 'Tip: Try cmd/ctrl + click on the links above',
-		footer: [
-			'Open to meaningful conversations and interesting opportunities',
-			'Feel free to reach out for questions, collaborations, or a quick hello',
-			'I do my best to respond in a timely manner',
-		],
-	},
 	messages: {
 		email: {
-			message: 'Send me an Email',
-			description: 'Send a message — I promise low-latency replies.',
-			success: 'Email launched — preparing witty yet professional response.',
-		},
-		resume: {
-			message: 'Checkout my Resume',
-			description: 'Pulling the latest version of my resume from production.',
-			success: 'Thanks for reading — hope my resume speaks your language.',
-		},
-		meeting: {
-			message: 'Schedule a Meeting',
-			description: 'Scheduling a sync — adding coffee to the calendar... ☕',
-			success: 'Meeting scheduled — time to build something great together.',
+			description: "Send a message — I promise low-latency replies.",
+			message: "Send me an Email",
+			success: "Email launched — preparing witty yet professional response.",
 		},
 		exit: {
-			message: 'Exit',
-			description: 'Ending session, but not the connection.',
-			success: 'Session ended — but DMs are always open.',
+			description: "Ending session, but not the connection.",
+			message: "Exit",
+			success: "Session ended — but DMs are always open.",
 		},
+		meeting: {
+			description: "Scheduling a sync — adding coffee to the calendar... ☕",
+			message: "Schedule a Meeting",
+			success: "Meeting scheduled — time to build something great together.",
+		},
+		resume: {
+			description: "Pulling the latest version of my resume from production.",
+			message: "Checkout my Resume",
+			success: "Thanks for reading — hope my resume speaks your language.",
+		},
+	},
+	theme: {
+		accent: "#f1c40f",
+		borderColor: "cyan",
+		borderStyle: "single",
+		primary: "cyanBright",
+		secondary: "whiteBright",
+	},
+	ui: {
+		cmdTip: "Tip: Try cmd/ctrl + click on the links above",
+		footer: [
+			"Open to meaningful conversations and interesting opportunities",
+			"Feel free to reach out for questions, collaborations, or a quick hello",
+			"I do my best to respond in a timely manner",
+		],
+		npx: "Cli Portfolio",
+		title: "Portfolio",
 	},
 };

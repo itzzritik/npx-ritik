@@ -1,5 +1,5 @@
-import { UserProfile } from '../core/types.js';
-import { CONFIG } from '../core/config.js';
+import { CONFIG } from "../core/config.js";
+import type { UserProfile } from "../core/types.js";
 
 export const fetchProfile = async (): Promise<UserProfile> => {
 	const res = await fetch(CONFIG.profileUrl);
@@ -7,8 +7,8 @@ export const fetchProfile = async (): Promise<UserProfile> => {
 	const profile = (await res.json()) as UserProfile;
 
 	const overrides: Record<string, string> = {
-		github: '#666666',
-		x: '#1DA1F2',
+		github: "#666666",
+		x: "#1DA1F2",
 	};
 
 	profile.socialHandles = profile.socialHandles.map((social) => ({

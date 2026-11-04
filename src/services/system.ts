@@ -1,12 +1,12 @@
-import { exec } from 'node:child_process';
+import { exec } from "node:child_process";
 
 export const openUrl = (target: string) => {
-	let command;
-	const platform = process.platform;
+	let command: string;
+	const { platform } = process;
 
-	if (platform === 'darwin') {
+	if (platform === "darwin") {
 		command = `open "${target}"`;
-	} else if (platform === 'win32') {
+	} else if (platform === "win32") {
 		command = `start "" "${target}"`;
 	} else {
 		command = `xdg-open "${target}"`;
@@ -14,6 +14,7 @@ export const openUrl = (target: string) => {
 
 	exec(command, (error) => {
 		if (error) {
+			// Ignore url opening failures silently
 		}
 	});
 };
